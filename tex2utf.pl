@@ -1993,8 +1993,13 @@ $contents{"\\buildrel"}="buildrel";
 $type{"\\frac"}="sub2";
 $contents{"\\frac"}="fraction";
 
+$type{"\\dfrac"}="sub2";
+$contents{"\\dfrac"}="fraction";
+
 $type{"\\LITERALnoLENGTH"}="sub1";
 $contents{"\\LITERALnoLENGTH"}="literal_no_length";
+
+# to remove stuff use this
 
 for ("text","operatorname","operatornamewithlimits","relax","-",
      "notag","!","/","protect","mathcal","Bbb","bf","it","em","boldsymbol",
@@ -2002,7 +2007,7 @@ for ("text","operatorname","operatornamewithlimits","relax","-",
      "makeatletter","makeatother","topmatter","endtopmatter","rm",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
-     "twelverm","tenrm","twelvefm","tenfm","hbox","mbox") {
+     "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr","vect","overrightarrow","vec",":") {
   $type{"\\$_"}="nothing";
 }
 for ("par","endtitle","endauthor","endaffil","endaddress","endemail",
@@ -2132,7 +2137,7 @@ $contents{"\\end"}="end";
 for ('@',"_","\$","{","}","#","&","arccos","arcsin","arctan","arg","cos",
     "cosh","cot","coth","csc","deg","det","dim","exp","gcd","hom",
     "inf","ker","lg","lim","liminf","limsup","ln","log","max","min",
-    "mod","Pr","sec","sin","sinh","sup","tan","tanh", "%") {
+    "mod","Pr","sec","sin","sinh","sup","tan","tanh", "%", "grad") {
   $type{"\\$_"}="self";
 }
 
@@ -2292,6 +2297,17 @@ $contents{"\\cap"}=" ∩ ";
 $type{"\\cup"}="string";
 $contents{"\\cup"}=" ∪ ";
 
+# BEGIN CUSTOM MACROS
+
+&define('\\varepsilon','\\epsilon');
+&define('\\eps','\\epsilon');
+&define('\\union','\\cup');
+&define('\\inter','\\cap');
+&define('\\som','\\sum');
+
+$type{"\\prodvect"}="string";
+$contents{"\\prodvect"}="^";
+
 $type{"\\N"}="string";
 $contents{"\\N"}="ℕ";
 
@@ -2309,6 +2325,29 @@ $contents{"\\R"}="ℝ";
 
 $type{"\\C"}="string";
 $contents{"\\C"}="ℂ";
+
+$type{"\\nabla"}="string";
+$contents{"\\nabla"}="∇";
+
+$type{"\\oiint"}="string";
+$contents{"\\oiint"}="∫∫";
+
+$type{"\\oint"}="string";
+$contents{"\\oint"}="∮";
+
+$type{"\\iiint"}="string";
+$contents{"\\iiint"}="∫∫∫";
+
+$type{"\\iint"}="string";
+$contents{"\\iint"}="∫∫";
+
+$type{"\\iff"}="string";
+$contents{"\\iff"}=" ⇔ ";
+
+$type{"\\imp"}="string";
+$contents{"\\imp"}=" ⇒ ";
+
+# END CUSTOM MACROS
 
 $type{"\\section"}="string";
 $contents{"\\section"}="Section ";
