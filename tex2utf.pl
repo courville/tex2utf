@@ -2292,6 +2292,21 @@ $contents{"\\cap"}=" ∩ ";
 $type{"\\cup"}="string";
 $contents{"\\cup"}=" ∪ ";
 
+$type{"\\Z"}="string";
+$contents{"\\Z"}="ℤ";
+
+$type{"\\P"}="string";
+$contents{"\\P"}="ℙ";
+
+$type{"\\Q"}="string";
+$contents{"\\Q"}="ℚ";
+
+$type{"\\R"}="string";
+$contents{"\\R"}="ℝ";
+
+$type{"\\C"}="string";
+$contents{"\\C"}="ℂ";
+
 $type{"\\section"}="string";
 $contents{"\\section"}="Section ";
 
