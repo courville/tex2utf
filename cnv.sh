@@ -13,3 +13,5 @@ case `uname` in
 esac
 
 cat greek | $SED 's/^\(.\) \\\(.\)\([^ ]*\) \(.\)/\\\2\3 \1\n\\\u\2\3 \4/g' | $SED 's/^\([^ ]*\) \(.*\)$/$type{"\\\1"}="string";\n$contents{"\\\1"}="\2";\n/g'
+cat macros | $SED 's/^\([^ ]*\) \(.*\)$/$type{"\\\1"}="string";\n$contents{"\\\1"}="\2";\n/g'
+
