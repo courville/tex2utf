@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # $Id: tex2utf.pl, v 1.1 2022/01/04 11:37:00 Pomax $
 #
