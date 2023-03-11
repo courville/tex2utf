@@ -1841,148 +1841,148 @@ $type{"\\supset"}="string";
 $contents{"\\supset"}="⊃";
 
 $type{"\\alpha"}="string";
-$contents{"\\supset"}="α";
+$contents{"\\alpha"}="α";
 
 $type{"\\Alpha"}="string";
-$contents{"\\supset"}="A";
+$contents{"\\Alpha"}="A";
 
 $type{"\\beta"}="string";
-$contents{"\\supset"}="β";
+$contents{"\\beta"}="β";
 
 $type{"\\Beta"}="string";
-$contents{"\\supset"}="B";
+$contents{"\\Beta"}="B";
 
 $type{"\\gamma"}="string";
-$contents{"\\supset"}="γ";
+$contents{"\\gamma"}="γ";
 
 $type{"\\Gamma"}="string";
-$contents{"\\supset"}="Γ";
+$contents{"\\Gamma"}="Γ";
 
 $type{"\\delta"}="string";
-$contents{"\\supset"}="δ";
+$contents{"\\delta"}="δ";
 
 $type{"\\Delta"}="string";
-$contents{"\\supset"}="Δ";
+$contents{"\\Delta"}="Δ";
 
 $type{"\\epsilon"}="string";
-$contents{"\\supset"}="ε";
+$contents{"\\epsilon"}="ε";
 
 $type{"\\Epsilon"}="string";
-$contents{"\\supset"}="E";
+$contents{"\\Epsilon"}="E";
 
 $type{"\\zeta"}="string";
-$contents{"\\supset"}="ζ";
+$contents{"\\zeta"}="ζ";
 
 $type{"\\Zeta"}="string";
-$contents{"\\supset"}="Ζ";
+$contents{"\\Zeta"}="Ζ";
 
 $type{"\\eta"}="string";
-$contents{"\\supset"}="η";
+$contents{"\\eta"}="η";
 
 $type{"\\Eta"}="string";
-$contents{"\\supset"}="Η";
+$contents{"\\Eta"}="Η";
 
 $type{"\\theta"}="string";
-$contents{"\\supset"}="θ";
+$contents{"\\theta"}="θ";
 
 $type{"\\Theta"}="string";
-$contents{"\\supset"}="Θ";
+$contents{"\\Theta"}="Θ";
 
 $type{"\\iota"}="string";
-$contents{"\\supset"}="ι";
+$contents{"\\iota"}="ι";
 
 $type{"\\Iota"}="string";
-$contents{"\\supset"}="Ι";
+$contents{"\\Iota"}="Ι";
 
 $type{"\\kappa"}="string";
-$contents{"\\supset"}="κ";
+$contents{"\\kappa"}="κ";
 
 $type{"\\Kappa"}="string";
-$contents{"\\supset"}="Κ";
+$contents{"\\Kappa"}="Κ";
 
 $type{"\\lambda"}="string";
-$contents{"\\supset"}="λ";
+$contents{"\\lambda"}="λ";
 
 $type{"\\Lambda"}="string";
-$contents{"\\supset"}="Λ";
+$contents{"\\Lambda"}="Λ";
 
 $type{"\\mu"}="string";
-$contents{"\\supset"}="μ";
+$contents{"\\mu"}="μ";
 
 $type{"\\Mu"}="string";
-$contents{"\\supset"}="Μ";
+$contents{"\\Mu"}="Μ";
 
 $type{"\\nu"}="string";
-$contents{"\\supset"}="ν";
+$contents{"\\nu"}="ν";
 
 $type{"\\Nu"}="string";
-$contents{"\\supset"}="Ν";
+$contents{"\\Nu"}="Ν";
 
 $type{"\\xi"}="string";
-$contents{"\\supset"}="ξ";
+$contents{"\\xi"}="ξ";
 
 $type{"\\Xi"}="string";
-$contents{"\\supset"}="Ξ";
+$contents{"\\Xi"}="Ξ";
 
 $type{"\\omicron"}="string";
-$contents{"\\supset"}="ℴ";
+$contents{"\\omicron"}="ℴ";
 
 $type{"\\Omicron"}="string";
-$contents{"\\supset"}="O";
+$contents{"\\Omicron"}="O";
 
 $type{"\\pi"}="string";
-$contents{"\\supset"}="π";
+$contents{"\\pi"}="π";
 
 $type{"\\Pi"}="string";
-$contents{"\\supset"}="Π";
+$contents{"\\Pi"}="Π";
 
 $type{"\\rho"}="string";
-$contents{"\\supset"}="ρ";
+$contents{"\\rho"}="ρ";
 
 $type{"\\Rho"}="string";
-$contents{"\\supset"}="Ρ";
+$contents{"\\Rho"}="Ρ";
 
 $type{"\\sigma"}="string";
-$contents{"\\supset"}="σ";
+$contents{"\\sigma"}="σ";
 
 $type{"\\Sigma"}="string";
-$contents{"\\supset"}="Σ";
+$contents{"\\Sigma"}="Σ";
 
 $type{"\\tau"}="string";
-$contents{"\\supset"}="τ";
+$contents{"\\tau"}="τ";
 
 $type{"\\Tau"}="string";
-$contents{"\\supset"}="Τ";
+$contents{"\\Tau"}="Τ";
 
 $type{"\\upsilon"}="string";
-$contents{"\\supset"}="υ";
+$contents{"\\upsilon"}="υ";
 
 $type{"\\Upsilon"}="string";
-$contents{"\\supset"}="ϒ";
+$contents{"\\Upsilon"}="ϒ";
 
 $type{"\\phi"}="string";
-$contents{"\\supset"}="φ";
+$contents{"\\phi"}="φ";
 
 $type{"\\Phi"}="string";
-$contents{"\\supset"}="Φ";
+$contents{"\\Phi"}="Φ";
 
 $type{"\\chi"}="string";
-$contents{"\\supset"}="χ";
+$contents{"\\chi"}="χ";
 
 $type{"\\Chi"}="string";
-$contents{"\\supset"}="X";
+$contents{"\\Chi"}="X";
 
 $type{"\\psi"}="string";
-$contents{"\\supset"}="ψ";
+$contents{"\\psi"}="ψ";
 
 $type{"\\Psi"}="string";
-$contents{"\\supset"}="Ψ";
+$contents{"\\Psi"}="Ψ";
 
 $type{"\\omega"}="string";
-$contents{"\\supset"}="ω";
+$contents{"\\omega"}="ω";
 
 $type{"\\Omega"}="string";
-$contents{"\\supset"}="Ω";
+$contents{"\\Omega"}="Ω";
 
 $type{"\\sqrt"}="sub1";
 $contents{"\\sqrt"}="radical";
