@@ -1840,6 +1840,51 @@ $contents{"\\subseteq"}="⊇";
 $type{"\\supset"}="string";
 $contents{"\\supset"}="⊃";
 
+$type{"\\alpha"}="string";
+$contents{"\\supset"}="α";
+
+$type{"\\Alpha"}="string";
+$contents{"\\supset"}="Α";
+
+$type{"\\beta"}="string";
+$contents{"\\supset"}="β";
+
+$type{"\\Beta"}="string";
+$contents{"\\supset"}="Β";
+
+$type{"\\gamma"}="string";
+$contents{"\\supset"}="γ";
+
+$type{"\\Gamma"}="string";
+$contents{"\\supset"}="Γ";
+
+$type{"\\delta"}="string";
+$contents{"\\supset"}="δ";
+
+$type{"\\Delta"}="string";
+$contents{"\\supset"}="Δ";
+
+$type{"\\epsilon"}="string";
+$contents{"\\supset"}="ε";
+
+$type{"\\Epsilon"}="string";
+$contents{"\\supset"}="Ε";
+
+$type{"\\pi"}="string";
+$contents{"\\pi"}="π";
+
+$type{"\\Pi"}="string";
+$contents{"\\Pi"}="π";
+
+$type{"\\sigma"}="string";
+$contents{"\\supset"}="σ";
+
+$type{"\\lambda"}="string";
+$contents{"\\lambda"}="λ";
+
+$type{"\\Omega"}="string";
+$contents{"\\supset"}="Ω";
+
 $type{"\\sqrt"}="sub1";
 $contents{"\\sqrt"}="radical";
 
@@ -2069,15 +2114,6 @@ $contents{"\\quad"}="   ";
 
 $type{"\\qquad"}="string";
 $contents{"\\qquad"}="     ";
-
-$type{"\\Delta"}="string";
-$contents{"\\Delta"}="△";
-
-$type{"\\Pi"}="string";
-$contents{"\\Pi"}="π";
-
-$type{"\\alpha"}="string";
-$contents{"\\alpha"}="α";
 
 $type{"\\to"}="string";
 $contents{"\\to"}=" ──> ";
