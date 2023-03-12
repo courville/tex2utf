@@ -1984,6 +1984,9 @@ $contents{"\\omega"}="ω";
 $type{"\\Omega"}="string";
 $contents{"\\Omega"}="Ω";
 
+$type{"\\hbar"}="string";
+$contents{"\\hbar"}="hb";
+
 $type{"\\sqrt"}="sub1";
 $contents{"\\sqrt"}="radical";
 
@@ -2002,14 +2005,15 @@ $contents{"\\LITERALnoLENGTH"}="literal_no_length";
 # to remove stuff use this
 
 for ("text","operatorname","operatornamewithlimits","relax","-",
-     "notag","!","/","protect","mathcal","Bbb","bf","it","em","boldsymbol",
+     "notag","!","/","protect","mathcal","mathrm","textnormal","Bbb","bf","it","em","boldsymbol",
      "cal","Cal","goth","ref","maketitle","expandafter","csname","endcsname",
      "makeatletter","makeatother","topmatter","endtopmatter","rm",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
-     "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr","vect","overrightarrow","vec",":") {
+     "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr","overrightarrow",":") {
   $type{"\\$_"}="nothing";
 }
+
 for ("par","endtitle","endauthor","endaffil","endaddress","endemail",
      "endhead","key","medskip","smallskip","bigskip","newpage",
      "vfill","eject","endgraph") {
@@ -2137,7 +2141,7 @@ $contents{"\\end"}="end";
 for ('@',"_","\$","{","}","#","&","arccos","arcsin","arctan","arg","cos",
     "cosh","cot","coth","csc","deg","det","dim","exp","gcd","hom",
     "inf","ker","lg","lim","liminf","limsup","ln","log","max","min",
-    "mod","Pr","sec","sin","sinh","sup","tan","tanh", "%", "grad") {
+    "mod","Pr","sec","sin","sinh","sup","tan","tanh", "%") {
   $type{"\\$_"}="self";
 }
 
@@ -2299,11 +2303,36 @@ $contents{"\\cup"}=" ∪ ";
 
 # BEGIN CUSTOM MACROS
 
+# remove macros
+for ("ve","vec","vect","Vect","dsp","dis","ds") {
+  $type{"\\$_"}="nothing";
+}
+
+for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
+  "cotan","Argsh","Argch","Argth","Arctan",
+  "Id","Sp","rg","tr","Ker","Im","Re","Im","e") {
+  $type{"\\$_"}="self";
+}
+
+&define('\\tah','\\th');
+&define('\\im','\\Im');
+&define('\\tnh','\\th');
+&define('\\la','\\lambda');
 &define('\\varepsilon','\\epsilon');
+&define('\\fphy','\\phi');
+&define('\\ex','\\exists');
+&define('\\alp','\\alpha');
+&define('\\fa','\\forall');
+&define('\\varphi','\\phi');
 &define('\\eps','\\epsilon');
 &define('\\union','\\cup');
 &define('\\inter','\\cap');
 &define('\\som','\\sum');
+&define('\\prud','\\prod');
+&define('\\dsum','\\sum');
+&define('\\dint','\\int');
+&define('\\dlim','\\lim');
+&define('\\dprod','\\prod');
 
 $type{"\\prodvect"}="string";
 $contents{"\\prodvect"}="^";
