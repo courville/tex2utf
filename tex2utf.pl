@@ -2208,6 +2208,9 @@ $environment{"array"}="arg2stack:matrix,endmatrixArg;1";
 $environment{"bmatrix"}="beg_lr;[;]:matrix,endmatrix;1;c";
 $environment{"vmatrix"}="beg_lr;|;|:matrix,endmatrix;1;c";
 
+$type{"\\varnothing"}="string";
+$contents{"\\varnothing"}="∅";
+
 $type{"~"}="string";
 $contents{"~"}=" ";
 
@@ -2377,6 +2380,9 @@ $contents{"\\prodvect"}="^";
 #&define('\\ind','\\perp');
 $type{"\\ind"}="string";
 $contents{"\\ind"}=" ind ";
+
+$type{"\\K"}="string";
+$contents{"\\K"}="𝕂";
 
 $type{"\\N"}="string";
 $contents{"\\N"}="ℕ";
