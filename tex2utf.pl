@@ -1997,8 +1997,33 @@ $contents{"\\buildrel"}="buildrel";
 $type{"\\frac"}="sub2";
 $contents{"\\frac"}="fraction";
 
+$type{"\\llbracket"}="string";
+$contents{"\\llbracket"}="[";
+
+$type{"\\rrbracket"}="string";
+$contents{"\\rrbracket"}="]";
+
+$type{"\\vvvert"}="string";
+$contents{"\\vvvert"}="|||";
+
+$type{"\\vvert"}="string";
+$contents{"\\vvert"}="||";
+
+$type{"\\vert"}="string";
+$contents{"\\vert"}="|";
+
+$type{"\\sim"}="string";
+$contents{"\\sim"}="~";
+
+$type{"\\perp"}="string";
+$contents{"\\perp"}=" orth ";
+#$contents{"\\perp"}="⊥";
+
 $type{"\\dfrac"}="sub2";
 $contents{"\\dfrac"}="fraction";
+
+$type{"\\tfrac"}="sub2";
+$contents{"\\tfrac"}="fraction";
 
 $type{"\\LITERALnoLENGTH"}="sub1";
 $contents{"\\LITERALnoLENGTH"}="literal_no_length";
@@ -2011,7 +2036,8 @@ for ("text","operatorname","operatornamewithlimits","relax","-",
      "makeatletter","makeatother","topmatter","endtopmatter","rm",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
-     "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr","overrightarrow",":") {
+     "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr",
+     "overrightarrow",":","tt","sf","textbf") {
   $type{"\\$_"}="nothing";
 }
 
@@ -2302,16 +2328,19 @@ $contents{"\\cap"}=" ∩ ";
 $type{"\\cup"}="string";
 $contents{"\\cup"}=" ∪ ";
 
+&define('\\bigcap','\\cap');
+&define('\\bigcup','\\cup');
+
 # BEGIN CUSTOM MACROS
 
 # remove macros
-for ("ve","vec","vect","Vect","dsp","dis","ds") {
+for ("ve","vec","vect","Vect","dsp","dis","ds","limits") {
   $type{"\\$_"}="nothing";
 }
 
 for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
   "cotan","Argsh","Argch","Argth","Arctan",
-  "Id","Sp","rg","tr","Ker","Im","Re","Im","e") {
+  "Id","Sp","rg","tr","Ker","Im","Re","Im","e","d") {
   $type{"\\$_"}="self";
 }
 
@@ -2335,8 +2364,19 @@ for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
 &define('\\dlim','\\lim');
 &define('\\dprod','\\prod');
 
+&define('\\llb','\\llbracket');
+&define('\\rrb','\\rrbracket');
+
+$type{"\\cov"}="string";
+$contents{"\\cov"}="Cov ";
+
 $type{"\\prodvect"}="string";
 $contents{"\\prodvect"}="^";
+
+# independance of random variables
+#&define('\\ind','\\perp');
+$type{"\\ind"}="string";
+$contents{"\\ind"}=" ind ";
 
 $type{"\\N"}="string";
 $contents{"\\N"}="ℕ";
@@ -2355,6 +2395,10 @@ $contents{"\\R"}="ℝ";
 
 $type{"\\C"}="string";
 $contents{"\\C"}="ℂ";
+
+# TODO verify ok on device otherwise ... or ∙∙∙
+$type{"\\adot"}="string";
+$contents{"\\adot"}="⋯";
 
 $type{"\\nabla"}="string";
 $contents{"\\nabla"}="∇";
