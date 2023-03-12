@@ -1986,6 +1986,7 @@ $contents{"\\Omega"}="Ω";
 
 $type{"\\hbar"}="string";
 $contents{"\\hbar"}="hb";
+#$contents{"\\hbar"}="ℏ"; # does not exist on most devices
 
 $type{"\\sqrt"}="sub1";
 $contents{"\\sqrt"}="radical";
