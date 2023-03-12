@@ -2037,7 +2037,7 @@ for ("text","operatorname","operatornamewithlimits","relax","-",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
      "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr",
-     "overrightarrow",":","tt","sf","textbf") {
+     "overrightarrow",":","tt","sf","textbf"," ") {
   $type{"\\$_"}="nothing";
 }
 
@@ -2146,6 +2146,9 @@ $contents{'\\"'}='putover_string;"';
 
 $type{'\\dot'}="sub1";
 $contents{'\\dot'}='putover_string;.';
+
+$type{'\\ddot'}="sub1";
+$contents{'\\ddot'}='putover_string;..';
 
 $type{"\\not"}="sub1";
 $contents{"\\not"}="not";
@@ -2351,11 +2354,11 @@ for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
 &define('\\im','\\Im');
 &define('\\tnh','\\th');
 &define('\\la','\\lambda');
-&define('\\varepsilon','\\epsilon');
 &define('\\fphy','\\phi');
 &define('\\ex','\\exists');
 &define('\\alp','\\alpha');
 &define('\\fa','\\forall');
+&define('\\varepsilon','\\epsilon');
 &define('\\varphi','\\phi');
 &define('\\eps','\\epsilon');
 &define('\\union','\\cup');
