@@ -2012,12 +2012,21 @@ $contents{"\\vvert"}="||";
 $type{"\\vert"}="string";
 $contents{"\\vert"}="|";
 
+$type{"\\Vert"}="string";
+$contents{"\\Vert"}="|";
+
 $type{"\\sim"}="string";
 $contents{"\\sim"}="~";
 
 $type{"\\perp"}="string";
 $contents{"\\perp"}=" orth ";
 #$contents{"\\perp"}="⊥";
+
+$type{"\\top"}="string";
+$contents{"\\top"}="⊤";
+
+$type{"\\bot"}="string";
+$contents{"\\bot"}="⊥";
 
 $type{"\\dfrac"}="sub2";
 $contents{"\\dfrac"}="fraction";
@@ -2037,7 +2046,7 @@ for ("text","operatorname","operatornamewithlimits","relax","-",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
      "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr",
-     "overrightarrow",":","tt","sf","textbf"," ") {
+     "overrightarrow",":","tt","sf","textbf") {
   $type{"\\$_"}="nothing";
 }
 
@@ -2339,19 +2348,40 @@ $contents{"\\cup"}=" ∪ ";
 
 # BEGIN CUSTOM MACROS
 
+$type{"\\ssi"}="string";
+$contents{"\\ssi"}="si et seulement si";
+
+$type{"\\cnsp"}="string";
+$contents{"\\cnsp"}="condition nécessaire et suffisante portant sur";
+
+&define('\\tran#1','{#1}^{\top}');
+&define('\\norme#1','\Vert #1\Vert');
+# TODO does not work with multiple parameters
+&define('\\binome#1,#2','{{#1}\choose{#2}}');
+&define('\\integ#1,#2,#3,#4','\int_{#1}^{#2}#3 d#4');
+
 # remove macros
-for ("ve","vec","vect","Vect","dsp","dis","ds","limits") {
+for ("ve","vec","vect","Vect","dsp","dis","ds","limits","non") {
   $type{"\\$_"}="nothing";
 }
 
 for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
   "cotan","Argsh","Argch","Argth","Arctan",
-  "Id","Sp","rg","tr","Ker","Im","Re","Im","e","d") {
+  "Id","Sp","rg","tr","Ker","Im","Re","e","d") {
   $type{"\\$_"}="self";
 }
 
+&define('\\lp','\\left)');
+&define('\\rp','\\right)');
+&define('\\lf','\\lfloor)');
+&define('\\rf','\\rfloor)');
+&define('\\fo','\\footnote)');
+&define('\\trans','^t');
+&define('\\oLasyGuill','≪');
+&define('\\fLasyGuill','≫');
+
 &define('\\tah','\\th');
-&define('\\im','\\Im');
+&define('\\im','Im');
 &define('\\tnh','\\th');
 &define('\\la','\\lambda');
 &define('\\fphy','\\phi');
@@ -2437,6 +2467,9 @@ $contents{"\\section"}="Section ";
 
 $type{"\\subsection"}="string";
 $contents{"\\subsection"}="Subsection ";
+
+$type{"\\subsubsection"}="string";
+$contents{"\\subsubsection"}="Subsubsection ";
 
 $type{"\|"}="string";
 $contents{"\|"}="||";
