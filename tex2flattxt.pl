@@ -2466,12 +2466,12 @@ for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
 &define('\\eps','\\epsilon');
 &define('\\union','\\cup');
 &define('\\inter','\\cap');
-&define('\\som','\\sum');
-&define('\\prud','\\prod');
-&define('\\dsum','\\sum');
-&define('\\dint','\\int');
+&define('\\som','∑');
+&define('\\prud','∏');
+&define('\\dsum','∑');
+&define('\\dint','∫');
 &define('\\dlim','\\lim');
-&define('\\dprod','\\prod');
+&define('\\dprod','∏');
 
 &define('\\llb','\\llbracket');
 &define('\\rrb','\\rrbracket');
