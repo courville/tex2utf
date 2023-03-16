@@ -672,16 +672,16 @@ sub f_subSuper {
 
 sub sup_sub {
   # b^a_u
-  local($a)=pop @out; # under
-  local($u)=pop @out; # above
+  local($a)=pop @out; # above
+  local($u)=pop @out; # under
   local($b)=$out[$#out]; # base
   local($hb,$lb,$bb,$spb,$strb)=split(/,/,$b,5);
   local($hu,$lu,$bu,$spu,$stru)=split(/,/,$u,5);
   local($ha,$la,$ba,$spa,$stra)=split(/,/,$a,5);
   $out=$b;
   local($isNumber,$isOneChar);
-  $isNumber=($strb =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  $isOneChar=($strb =~ /^.$/);
+  $isNumber=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=($stru =~ /^.$/);
   if ($lb > 0) {
     if(! $isNumber && ! $isOneChar) {
       $out[$#out]=&join($out,"1,2,0,0,_{");
