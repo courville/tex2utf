@@ -588,13 +588,13 @@ sub empty {
 }
 
 # Commits a record with a sum symbol
-sub sum {
-  &commit("3,2,1,0," . <<'EOF');
-__
-❯ 
-‾‾
-EOF
-}
+#sub sum {
+#  &commit("3,2,1,0," . <<'EOF');
+#__
+#❯ 
+#‾‾
+#EOF
+#}
 
 # Additional argument specifies if to make not-expandable, not-trimmable
 
@@ -671,24 +671,45 @@ sub f_subSuper {
 }
 
 sub sup_sub {
-  local($p1,$p2)=($#out-shift,$#out-shift);
-  warn "Super $p1 $out[$p1]\nSub $p2 $out[$p2]\n__END__\n" if $debug & $debug_record;
-  local($h1,$l1,$b1,$sp1,$str1)=split(/,/,$out[$p1],5);
-  local($h2,$l2,$b2,$sp2,$str2)=split(/,/,$out[$p2],5);
-  if ($l1==0 && $l2==0) {return;}
-  $h1 || $h1++;
-  $h2 || $h2++;
-  local($h,$l)=($h1+$h2+1, ($l1>$l2 ? $l1: $l2));
-  $#chunks--;
-  $#out--;
-  if ($l1==0) {
-    $h2++;
-    $out[$#out]="$h2,$l,0,0,\n$str2";
-  } elsif ($l2==0) {
-    $h=$h1+1;
-    $out[$#out]="$h,$l,$h1,0,$str1\n";
-  } else {
-    $out[$#out]="$h,$l,$h1,0,$str1\n\n$str2";
+  # b^a_u
+  local($a)=pop @out; # under
+  local($u)=pop @out; # above
+  local($b)=$out[$#out]; # base
+  local($hb,$lb,$bb,$spb,$strb)=split(/,/,$b,5);
+  local($hu,$lu,$bu,$spu,$stru)=split(/,/,$u,5);
+  local($ha,$la,$ba,$spa,$stra)=split(/,/,$a,5);
+  $out=$b;
+  local($isNumber,$isOneChar);
+  $isNumber=($strb =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=($strb =~ /^.$/);
+  if ($lb > 0) {
+    if(! $isNumber && ! $isOneChar) {
+      $out[$#out]=&join($out,"1,2,0,0,_{");
+    } else {
+      $out[$#out]=&join($out,"1,2,0,0,_");
+    }
+    $out=$out[$#out];
+    $out[$#out]=&join($out,$u);
+    $out=$out[$#out];
+    if(! $isNumber && ! $isOneChar) {
+      $out[$#out]=&join($out,"1,1,0,0,}");
+    }
+    $out=$out[$#out];
+  }
+  $isNumber=($stra =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=($stra =~ /^.$/);
+  if ($la > 0) {
+    if(! $isNumber && ! $isOneChar) {
+      $out[$#out]=&join($out,"1,2,0,0,^{");
+    } else {
+      $out[$#out]=&join($out,"1,2,0,0,^");
+    }
+    $out=$out[$#out];
+    $out[$#out]=&join($out,$a);
+    $out=$out[$#out];
+    if(! $isNumber && ! $isOneChar) {
+      $out[$#out]=&join($out,"1,1,0,0,}");
+    }
   }
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(2,1);
@@ -795,21 +816,29 @@ EOF
 # Takes the last record, returns a record that contains it and forms
 # radical block
 
+# TODO start with flat radical
+
 sub f_radical {
   warn "Entering f_radical...\n" if $debug & $debug_flow;
   &trim(1);
   &collapse(1);
   &assertHave(1) || &finish("",1);
   warn "Radical of $out[$#out]\n__END__\n" if $debug & $debug_record;
-  local($h,$l,$b)=($out[$#out] =~ /^(\d+),(\d+),(\d+)/g);
-  $h || $h++;
-  local($out,$b1,$h1);
-  $out=&vStack(&string2record(("─" x $l)."┐" ),$out[$#out]);
-  $b1=$b+1;
-  $h1=$h+1;
-  #$out =~ s/^(\d+,\d+,)(\d+)/\1$b1/;
-  &setbaseline($out,$b1);
-  $out[$#out]=&join("$h1,2,$b1,0, ┌\n" . (" │\n" x ($h-1)) . '⟍│',$out);
+  local($out);
+  $out=$out[$#out];
+  local($h,$l,$b,$sp,$c)=split(/,/,$out,5);
+  $isNumber=($c =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=($c =~ /^.$/);
+  &setbaseline($out,0);
+  if(! $isNumber && ! $isOneChar) {
+    $out[$#out]=&join("1,2,0,0,√[",$out);
+  } else {
+    $out[$#out]=&join("1,2,0,0,√",$out);
+  }
+  $out=$out[$#out];
+  if(! $isNumber && ! $isOneChar) {
+    $out[$#out]=&join($out,"1,1,0,0,]");
+  }
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(1,1);
 }
@@ -823,13 +852,37 @@ sub f_fraction {
   &collapse(2);
   &assertHave(2) || &finish("",1);
   warn "Numer `$out[$#out-1]'\nDenom `$out[$#out]'\n__END__\n" if $debug & $debug_record;
-  local($l1,$l2)=(&length($out[$#out-1]),&length($out[$#out]));
-  local($len)=(($l1>$l2 ? $l1: $l2));
-  $out[$#out-1]=&vStack(&vStack(&center($len,$out[$#out-1]),
-                         &string2record("─" x $len)),
-                 &center($len,$out[$#out]));
-  $#chunks--;
-  $#out--;
+  local($den,$out);
+  $den=pop @out;
+  local($h,$l,$b,$e,$c)=($out[$#out] =~ /^(\d+),(\d+),(\d+),(\d+),(.*)$/g);
+  local($isNumber,$isOneChar);
+  $isNumber=($c =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=($c =~ /^.$/);
+  # $out is numerator
+  $out=$out[$#out];
+  if(! $isNumber && ! $isOneChar) {
+    $out[$#out]=&join("1,1,0,0,(",$out);
+    $out=$out[$#out];
+    $out[$#out]=&join($out,"1,1,0,0,)");
+    $out=$out[$#out];
+  }
+  $out[$#out]=&join($out,"1,1,0,0,/");
+  $out=$out[$#out];
+  ($h,$l,$b,$e,$c)=($den =~ /^(\d+),(\d+),(\d+),(\d+),(.*)$/g);
+  $isNumber=($c =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=($c =~ /^.$/);
+  if(! $isNumber && ! $isOneChar) {
+    $out[$#out]=&join($out,"1,1,0,0,(");
+    $out=$out[$#out];
+  }
+  $out[$#out]=&join($out,$den);
+  if(! $isNumber && ! $isOneChar) {
+    $out=$out[$#out];
+    $out[$#out]=&join($out,"1,1,0,0,)");
+  }
+  $out[$#out] = "1,1,0,0,½" if ($out[$#out] eq "1,3,0,0,1/2");
+  $out[$#out] = "1,1,0,0,⅓" if ($out[$#out] eq "1,3,0,0,1/3");
+  $out[$#out] = "1,1,0,0,¼" if ($out[$#out] eq "1,3,0,0,1/4");
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(2,1);
 }
@@ -1741,32 +1794,44 @@ sub arg2stack {push(@argStack,&get_balanced());}
 sub par {&finishBuffer;&commit("1,5,0,0,     ")
   unless $par =~ s/^\s*\\noindent\s*(\s+|([^a-zA-Z\s])|$)/\2/;}
 
-$type{"\\sum"}="record";
-$contents{"\\sum"}="3,3,1,0," . <<'EOF';
-__ 
-❯  
-‾‾ 
-EOF
+#$type{"\\sum"}="record";
+#$contents{"\\sum"}="3,3,1,0," . <<'EOF';
+#__ 
+#❯  
+#‾‾ 
+#EOF
 
-$type{"\\int"}="record";
-$contents{"\\int"}="3,3,1,0," . <<'EOF';
- ╭ 
- |
- ╯ 
-EOF
+#$type{"\\int"}="record";
+#$contents{"\\int"}="3,3,1,0," . <<'EOF';
+# ╭ 
+# |
+# ╯ 
+#EOF
 
-$type{"\\prod"}="record";
-$contents{"\\prod"}="2,3,1,0," . <<'EOF';
-___
-│ │
-EOF
+#$type{"\\prod"}="record";
+#$contents{"\\prod"}="2,3,1,0," . <<'EOF';
+#___
+#│ │
+#EOF
 
-$type{"\\Sigma"}="record";
-$contents{"\\Sigma"}="3,2,1,0," . <<'EOF';
-__
-❯ 
-‾‾
-EOF
+#$type{"\\Sigma"}="record";
+#$contents{"\\Sigma"}="3,2,1,0," . <<'EOF';
+#__
+#❯ 
+#‾‾
+#EOF
+
+$type{"\\sum"}="string";
+$contents{"\\sum"}="∑";
+
+$type{"\\Sigma"}="string";
+$contents{"\\Sigma"}="∑";
+
+$type{"\\prod"}="string";
+$contents{"\\prod"}="∏";
+
+$type{"\\int"}="string";
+$contents{"\\int"}="∫";
 
 $type{"\\textit"}="string";
 $contents{"\\textit"}=" ";
@@ -1988,12 +2053,15 @@ $type{"\\hbar"}="string";
 $contents{"\\hbar"}="hb";
 #$contents{"\\hbar"}="ℏ"; # does not exist on most devices
 
+# subroutine with 1 argument
 $type{"\\sqrt"}="sub1";
 $contents{"\\sqrt"}="radical";
 
+# subrouting with 3 arguments
 $type{"\\buildrel"}="sub3";
 $contents{"\\buildrel"}="buildrel";
 
+# subrouting with 2 arguments
 $type{"\\frac"}="sub2";
 $contents{"\\frac"}="fraction";
 
