@@ -684,9 +684,9 @@ sub sup_sub {
   $isOneChar=($stru =~ /^.$/);
   if ($lb > 0) {
     if(! $isNumber && ! $isOneChar) {
-      $out[$#out]=&join($out,"1,2,0,0,_{");
+      $out[$#out]=&join($b,"1,2,0,0,_{");
     } else {
-      $out[$#out]=&join($out,"1,2,0,0,_");
+      $out[$#out]=&join($b,"1,1,0,0,_");
     }
     $out=$out[$#out];
     $out[$#out]=&join($out,$u);
@@ -702,7 +702,7 @@ sub sup_sub {
     if(! $isNumber && ! $isOneChar) {
       $out[$#out]=&join($out,"1,2,0,0,^{");
     } else {
-      $out[$#out]=&join($out,"1,2,0,0,^");
+      $out[$#out]=&join($out,"1,1,0,0,^");
     }
     $out=$out[$#out];
     $out[$#out]=&join($out,$a);
