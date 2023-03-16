@@ -670,10 +670,15 @@ sub f_subSuper {
   &sup_sub(0,1);
 }
 
+# DEBUGS
+#  warn "MARC sup_sub @out\n";
+#  warn "MARC sup_sub $strb _ $stru ^ $stra\n";
+#  warn "MARC sup_sub isNumber $isNumber isOneChar $isoneChar\n";
+
 sub sup_sub {
   # b^a_u
-  local($a)=pop @out; # above
   local($u)=pop @out; # under
+  local($a)=pop @out; # above
   local($b)=$out[$#out]; # base
   local($hb,$lb,$bb,$spb,$strb)=split(/,/,$b,5);
   local($hu,$lu,$bu,$spu,$stru)=split(/,/,$u,5);
@@ -682,7 +687,7 @@ sub sup_sub {
   local($isNumber,$isOneChar);
   $isNumber=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
   $isOneChar=($stru =~ /^.$/);
-  if ($lb > 0) {
+  if ($lu > 0) {
     if(! $isNumber && ! $isOneChar) {
       $out[$#out]=&join($b,"1,2,0,0,_{");
     } else {
@@ -833,7 +838,7 @@ sub f_radical {
   if(! $isNumber && ! $isOneChar) {
     $out[$#out]=&join("1,2,0,0,√[",$out);
   } else {
-    $out[$#out]=&join("1,2,0,0,√",$out);
+    $out[$#out]=&join("1,1,0,0,√",$out);
   }
   $out=$out[$#out];
   if(! $isNumber && ! $isOneChar) {
