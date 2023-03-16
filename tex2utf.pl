@@ -2046,7 +2046,7 @@ for ("text","operatorname","operatornamewithlimits","relax","-",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
      "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr",
-     "overrightarrow",":","tt","sf","textbf") {
+     "overrightarrow",":","tt","sf","textbf","fbox","framebox") {
   $type{"\\$_"}="nothing";
 }
 
