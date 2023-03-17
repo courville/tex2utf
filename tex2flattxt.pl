@@ -729,13 +729,13 @@ sub sup_sub {
     }
   }
 
-  local($h,$l)=($hSup+$hSub+1, ($lSup>$lSub ? $lSup: $lSub));
+  local($l)=($lSup>$lSub ? $lSup: $lSub);
   if ($lSup==0) {
-    $out[$#out]="$hSub,$l,0,0,$strSub";
+    $out[$#out]="1,$l,0,0,$strSub";
   } elsif ($lSub==0) {
-    $out[$#out]="$h,$l,$hSup,0,$strSup";
+    $out[$#out]="1,$l,0,0,$strSup";
   } else {
-    $out[$#out]="$h,$l,$hSup,0,$strSub$strSup";
+    $out[$#out]="1,$l,0,0,$strSub$strSup";
   }
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(2,1);
