@@ -677,86 +677,65 @@ sub f_subSuper {
 
 sub sup_sub {
   # b^a_u
-  local($p1,$p2)=($#out-shift,$#out-shift);
-  local($a)=$out[$p1]; # under
-  local($u)=$out[$p2]; # above
-  local($b)=$out[0]; # base
-  local($hb,$lb,$bb,$spb,$strb)=split(/,/,$b,5);
-  local($hu,$lu,$bu,$spu,$stru)=split(/,/,$u,5);
-  local($ha,$la,$ba,$spa,$stra)=split(/,/,$a,5);
-  $out=$b;
-  local($isNumber,$isOneChar,$knownPower);
-  $isNumber=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  $knownPower=($stru =~ /^[0-9]$/);
-  $isOneChar=(length($stru) == 1);
+  local($pSup,$pSub)=($#out-shift,$#out-shift);
+  warn "Super $pSup $out[$pSup], Sub $pSub $out[$pSub]\n" if $debug & $debug_record;
+
+  local($Sup)=$out[$pSup]; # Sup
+  local($Sub)=$out[$pSub]; # Sub
+  local($hSub,$lSub,$bSub,$spSub,$strSub)=split(/,/,$Sub,5);
+  local($hSup,$lSup,$bSup,$spSup,$strSup)=split(/,/,$Sup,5);
+
+  if ($lSup==0 && $lSub==0) {return;}
+
   $#out--;
-  $#out--;
-  # TODO check that it contains +-0-9
-  $a="0,1,0,0,⁰" if ($a eq "0,1,0,0,0");
-  $a="0,1,0,0,²" if ($a eq "0,1,0,0,1");
-  $a="0,1,0,0,²" if ($a eq "0,1,0,0,2");
-  $a="0,1,0,0,³" if ($a eq "0,1,0,0,3");
-  $a="0,1,0,0,⁴" if ($a eq "0,1,0,0,4");
-  $a="0,1,0,0,⁵" if ($a eq "0,1,0,0,5");
-  $a="0,1,0,0,⁶" if ($a eq "0,1,0,0,6");
-  $a="0,1,0,0,⁷" if ($a eq "0,1,0,0,7");
-  $a="0,1,0,0,⁸" if ($a eq "0,1,0,0,8");
-  $a="0,1,0,0,⁹" if ($a eq "0,1,0,0,9");
-  $a="0,1,0,0,ⁿ" if ($a eq "0,1,0,0,n");
-  $a="0,1,0,0,⁺" if ($a eq "0,1,0,0,+");
-  $a="0,1,0,0,⁻" if ($a eq "0,1,0,0,-");
-  $a="0,1,0,0,ⁱ" if ($a eq "0,1,0,0,i");
-  $u="0,1,0,0,₀" if ($u eq "0,1,0,0,0");
-  $u="0,1,0,0,₁" if ($u eq "0,1,0,0,1");
-  $u="0,1,0,0,₂" if ($u eq "0,1,0,0,2");
-  $u="0,1,0,0,₃" if ($u eq "0,1,0,0,3");
-  $u="0,1,0,0,₄" if ($u eq "0,1,0,0,4");
-  $u="0,1,0,0,₅" if ($u eq "0,1,0,0,5");
-  $u="0,1,0,0,₆" if ($u eq "0,1,0,0,6");
-  $u="0,1,0,0,₇" if ($u eq "0,1,0,0,7");
-  $u="0,1,0,0,₈" if ($u eq "0,1,0,0,8");
-  $u="0,1,0,0,₉" if ($u eq "0,1,0,0,9");
-  warn "MARC sup_sub $b _ $u ^ $a\n";
-  if ($lu > 0) {
-    if($knownPower == 0) {
-      if(! $isNumber && ! $isOneChar) {
-	$out[$#out]=&join($b,"1,2,0,0,_{");
+  $#chunks--;
+
+  local($isNumberSub,$isOneCharSub,$knownSub);
+  $isNumberSub=($strSub =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $knownSub=($strSub =~ /^[0-9]*$/);
+  $isOneCharSub=(length($strSub) == 1);
+  local($isNumberSup,$isOneCharSup,$knownSup);
+  $isNumberSup=($strSup =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $knownSup=($strSup =~ /^[0-9in+-]*$/);
+  $isOneCharSup=(length($strSup) == 1);
+  $strSub =~ tr[0123456789][₀₁₂₃₄₅₆₇₈₉];
+  $strSup =~ tr[+−=()0123456789in][⁺⁻⁼⁽⁾⁰¹²³⁴⁵⁶⁷⁸⁹ⁱⁿ];
+
+  if($lSub>0){
+    if($knownSub == 0) {
+      if(! $isNumberSub && ! $isOneCharSub) {
+	$lSub=$lSub+3;
+	$strSub="_{$strSub}";
       } else {
-	$out[$#out]=&join($b,"1,1,0,0,_");
-      }
-      $out=$out[$#out];
-      $out[$#out]=&join($out,$u);
-      $out=$out[$#out];
-      if(! $isNumber && ! $isOneChar) {
-	$out[$#out]=&join($out,"1,1,0,0,}");
+	$lSub++;
+	$strSub="_$strSub";
       }
     } else {
-      $out[$#out]=&join($out,$u);
+      # do nothing
     }
-    $out=$out[$#out];
   }
-  $isNumber=($stra =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  $knownPower=($stra =~ /^[0-9in+-]$/);
-  $isOneChar=(length($stra) == 1);
-  local($l);
-  $l=length($stra);
-  $isOneChar=(length($stra) == 1);
-  if ($la > 0) {
-    if($knownPower == 0) {
-      if(! $isNumber && ! $isOneChar) {
-	$out[$#out]=&join($out,"1,2,0,0,^{");
+
+  if($lSup>0){
+    if($knownSup == 0) {
+      if(! $isNumberSup && ! $isOneCharSup) {
+	$lSup=$lSup+3;
+	$strSup="^{$strSup}";
       } else {
-	$out[$#out]=&join($out,"1,1,0,0,^");
-      }
-      $out=$out[$#out];
-      $out[$#out]=&join($out,$a);
-      $out=$out[$#out];
-      if(! $isNumber && ! $isOneChar) {
-	$out[$#out]=&join($out,"1,1,0,0,}");
+	$lSup++;
+	$strSup="^$strSup";
       }
     } else {
-      $out[$#out]=&join($out,$a);
+      # do nothing
     }
+  }
+
+  local($h,$l)=($hSup+$hSub+1, ($lSup>$lSub ? $lSup: $lSub));
+  if ($lSup==0) {
+    $out[$#out]="$hSub,$l,0,0,$strSub";
+  } elsif ($lSub==0) {
+    $out[$#out]="$h,$l,$hSup,0,$strSup";
+  } else {
+    $out[$#out]="$h,$l,$hSup,0,$strSub$strSup";
   }
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(2,1);
