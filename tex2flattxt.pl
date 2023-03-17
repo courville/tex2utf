@@ -687,7 +687,7 @@ sub sup_sub {
   $out=$b;
   local($isNumber,$isOneChar,$knownPower);
   $isNumber=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  $isOneChar=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $knownPower=($stru =~ /^[0-9]$/);
   $isOneChar=(length($stru) == 1);
   $#out--;
   $#out--;
@@ -716,12 +716,7 @@ sub sup_sub {
   $u="0,1,0,0,₇" if ($u eq "0,1,0,0,7");
   $u="0,1,0,0,₈" if ($u eq "0,1,0,0,8");
   $u="0,1,0,0,₉" if ($u eq "0,1,0,0,9");
-  # TODO BUG knownPower does not work
-  if($stru > 0 && $stru < 10) {
-    $knownPower=1;
-  } else {
-    $knownPower=0;
-  }
+  warn "MARC sup_sub $b _ $u ^ $a\n";
   if ($lu > 0) {
     if($knownPower == 0) {
       if(! $isNumber && ! $isOneChar) {
@@ -730,7 +725,7 @@ sub sup_sub {
 	$out[$#out]=&join($b,"1,1,0,0,_");
       }
       $out=$out[$#out];
-      $out[$#out]=&join($out,$a);
+      $out[$#out]=&join($out,$u);
       $out=$out[$#out];
       if(! $isNumber && ! $isOneChar) {
 	$out[$#out]=&join($out,"1,1,0,0,}");
@@ -741,12 +736,8 @@ sub sup_sub {
     $out=$out[$#out];
   }
   $isNumber=($stra =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  #$isOneChar=($stra =~ /^.$/);
-  if($stra > 0 && $stra < 10) {
-    $knownPower=1;
-  } else {
-    $knownPower=0;
-  }
+  $knownPower=($stra =~ /^[0-9in+-]$/);
+  $isOneChar=(length($stra) == 1);
   local($l);
   $l=length($stra);
   $isOneChar=(length($stra) == 1);
