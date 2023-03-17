@@ -2229,14 +2229,23 @@ $contents{"~"}=" ";
 $type{"\\,"}="string";
 $contents{"\\,"}=" ";
 
-$type{"\\dots"}="string";
-$contents{"\\dots"}="...";
-
-$type{"\\ldots"}="string";
-$contents{"\\ldots"}="...";
-
 $type{"\\cdots"}="string";
 $contents{"\\cdots"}="⋯";
+
+$type{"\\dots"}="string";
+$contents{"\\dots"}="⋱";
+
+$type{"\\uots"}="string";
+$contents{"\\uots"}="⋰";
+
+$type{"\\ldots"}="string";
+$contents{"\\ldots"}="…";
+
+$type{"\\vdots"}="string";
+$contents{"\\vdots"}="⋮";
+
+$type{"\\vdots"}="string";
+$contents{"\\vdots"}="⋯";
 
 $type{"\\colon"}="string";
 $contents{"\\colon"}=": ";

@@ -677,43 +677,94 @@ sub f_subSuper {
 
 sub sup_sub {
   # b^a_u
-  local($u)=pop @out; # under
-  local($a)=pop @out; # above
-  local($b)=$out[$#out]; # base
+  local($p1,$p2)=($#out-shift,$#out-shift);
+  local($a)=$out[$p1]; # under
+  local($u)=$out[$p2]; # above
+  local($b)=$out[0]; # base
   local($hb,$lb,$bb,$spb,$strb)=split(/,/,$b,5);
   local($hu,$lu,$bu,$spu,$stru)=split(/,/,$u,5);
   local($ha,$la,$ba,$spa,$stra)=split(/,/,$a,5);
   $out=$b;
-  local($isNumber,$isOneChar);
+  local($isNumber,$isOneChar,$knownPower);
   $isNumber=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  $isOneChar=($stru =~ /^.$/);
+  $isOneChar=($stru =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
+  $isOneChar=(length($stru) == 1);
+  $#out--;
+  $#out--;
+  # TODO check that it contains +-0-9
+  $a="0,1,0,0,⁰" if ($a eq "0,1,0,0,0");
+  $a="0,1,0,0,²" if ($a eq "0,1,0,0,1");
+  $a="0,1,0,0,²" if ($a eq "0,1,0,0,2");
+  $a="0,1,0,0,³" if ($a eq "0,1,0,0,3");
+  $a="0,1,0,0,⁴" if ($a eq "0,1,0,0,4");
+  $a="0,1,0,0,⁵" if ($a eq "0,1,0,0,5");
+  $a="0,1,0,0,⁶" if ($a eq "0,1,0,0,6");
+  $a="0,1,0,0,⁷" if ($a eq "0,1,0,0,7");
+  $a="0,1,0,0,⁸" if ($a eq "0,1,0,0,8");
+  $a="0,1,0,0,⁹" if ($a eq "0,1,0,0,9");
+  $a="0,1,0,0,ⁿ" if ($a eq "0,1,0,0,n");
+  $a="0,1,0,0,⁺" if ($a eq "0,1,0,0,+");
+  $a="0,1,0,0,⁻" if ($a eq "0,1,0,0,-");
+  $a="0,1,0,0,ⁱ" if ($a eq "0,1,0,0,i");
+  $u="0,1,0,0,₀" if ($u eq "0,1,0,0,0");
+  $u="0,1,0,0,₁" if ($u eq "0,1,0,0,1");
+  $u="0,1,0,0,₂" if ($u eq "0,1,0,0,2");
+  $u="0,1,0,0,₃" if ($u eq "0,1,0,0,3");
+  $u="0,1,0,0,₄" if ($u eq "0,1,0,0,4");
+  $u="0,1,0,0,₅" if ($u eq "0,1,0,0,5");
+  $u="0,1,0,0,₆" if ($u eq "0,1,0,0,6");
+  $u="0,1,0,0,₇" if ($u eq "0,1,0,0,7");
+  $u="0,1,0,0,₈" if ($u eq "0,1,0,0,8");
+  $u="0,1,0,0,₉" if ($u eq "0,1,0,0,9");
+  # TODO BUG knownPower does not work
+  if($stru > 0 && $stru < 10) {
+    $knownPower=1;
+  } else {
+    $knownPower=0;
+  }
   if ($lu > 0) {
-    if(! $isNumber && ! $isOneChar) {
-      $out[$#out]=&join($b,"1,2,0,0,_{");
+    if($knownPower == 0) {
+      if(! $isNumber && ! $isOneChar) {
+	$out[$#out]=&join($b,"1,2,0,0,_{");
+      } else {
+	$out[$#out]=&join($b,"1,1,0,0,_");
+      }
+      $out=$out[$#out];
+      $out[$#out]=&join($out,$a);
+      $out=$out[$#out];
+      if(! $isNumber && ! $isOneChar) {
+	$out[$#out]=&join($out,"1,1,0,0,}");
+      }
     } else {
-      $out[$#out]=&join($b,"1,1,0,0,_");
-    }
-    $out=$out[$#out];
-    $out[$#out]=&join($out,$u);
-    $out=$out[$#out];
-    if(! $isNumber && ! $isOneChar) {
-      $out[$#out]=&join($out,"1,1,0,0,}");
+      $out[$#out]=&join($out,$u);
     }
     $out=$out[$#out];
   }
   $isNumber=($stra =~ /^-?(0|([1-9][0-9]*))(\.[0-9]+)?([eE][-+]?[0-9]+)?$/);
-  $isOneChar=($stra =~ /^.$/);
+  #$isOneChar=($stra =~ /^.$/);
+  if($stra > 0 && $stra < 10) {
+    $knownPower=1;
+  } else {
+    $knownPower=0;
+  }
+  local($l);
+  $l=length($stra);
+  $isOneChar=(length($stra) == 1);
   if ($la > 0) {
-    if(! $isNumber && ! $isOneChar) {
-      $out[$#out]=&join($out,"1,2,0,0,^{");
+    if($knownPower == 0) {
+      if(! $isNumber && ! $isOneChar) {
+	$out[$#out]=&join($out,"1,2,0,0,^{");
+      } else {
+	$out[$#out]=&join($out,"1,1,0,0,^");
+      }
+      $out=$out[$#out];
+      $out[$#out]=&join($out,$a);
+      $out=$out[$#out];
+      if(! $isNumber && ! $isOneChar) {
+	$out[$#out]=&join($out,"1,1,0,0,}");
+      }
     } else {
-      $out[$#out]=&join($out,"1,1,0,0,^");
-    }
-    $out=$out[$#out];
-    $out[$#out]=&join($out,$a);
-    $out=$out[$#out];
-    if(! $isNumber && ! $isOneChar) {
-      $out[$#out]=&join($out,"1,1,0,0,}");
+      $out[$#out]=&join($out,$a);
     }
   }
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
@@ -885,9 +936,15 @@ sub f_fraction {
     $out=$out[$#out];
     $out[$#out]=&join($out,"1,1,0,0,)");
   }
+  # supported by HP Prime
   $out[$#out] = "1,1,0,0,½" if ($out[$#out] eq "1,3,0,0,1/2");
   $out[$#out] = "1,1,0,0,⅓" if ($out[$#out] eq "1,3,0,0,1/3");
   $out[$#out] = "1,1,0,0,¼" if ($out[$#out] eq "1,3,0,0,1/4");
+  $out[$#out] = "1,1,0,0,¼" if ($out[$#out] eq "1,3,0,0,2/3");
+  $out[$#out] = "1,1,0,0,⅛" if ($out[$#out] eq "1,3,0,0,1/8");
+  $out[$#out] = "1,1,0,0,⅜" if ($out[$#out] eq "1,3,0,0,3/8");
+  $out[$#out] = "1,1,0,0,⅝" if ($out[$#out] eq "1,3,0,0,5/8");
+  $out[$#out] = "1,1,0,0,⅞" if ($out[$#out] eq "1,3,0,0,7/8");
   warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(2,1);
 }
@@ -2302,14 +2359,23 @@ $contents{"~"}=" ";
 $type{"\\,"}="string";
 $contents{"\\,"}=" ";
 
-$type{"\\dots"}="string";
-$contents{"\\dots"}="...";
-
-$type{"\\ldots"}="string";
-$contents{"\\ldots"}="...";
-
 $type{"\\cdots"}="string";
 $contents{"\\cdots"}="⋯";
+
+$type{"\\dots"}="string";
+$contents{"\\dots"}="⋱";
+
+$type{"\\uots"}="string";
+$contents{"\\uots"}="⋰";
+
+$type{"\\ldots"}="string";
+$contents{"\\ldots"}="…";
+
+$type{"\\vdots"}="string";
+$contents{"\\vdots"}="⋮";
+
+$type{"\\vdots"}="string";
+$contents{"\\vdots"}="⋯";
 
 $type{"\\colon"}="string";
 $contents{"\\colon"}=": ";
