@@ -2348,25 +2348,25 @@ $type{"\\vdots"}="string";
 $contents{"\\vdots"}="⋯";
 
 $type{"\\colon"}="string";
-$contents{"\\colon"}=": ";
+$contents{"\\colon"}=":";
 
 $type{"\\mid"}="string";
-$contents{"\\mid"}=" | ";
+$contents{"\\mid"}="|";
 
 $type{"\\smallsetminus"}="string";
-$contents{"\\smallsetminus"}=" ⧵ ";
+$contents{"\\smallsetminus"}="⧵";
 
 $type{"\\setminus"}="string";
-$contents{"\\setminus"}=" ⧹ ";
+$contents{"\\setminus"}="⧹";
 
 $type{"\\backslash"}="string";
 $contents{"\\backslash"}="\\";
 
 $type{"\\approx"}="string";
-$contents{"\\approx"}=" ≅ ";
+$contents{"\\approx"}="≅";
 
 $type{"\\simeq"}="string";
-$contents{"\\simeq"}=" ≃ ";
+$contents{"\\simeq"}="≃";
 
 $type{"\\quad"}="string";
 $contents{"\\quad"}="   ";
@@ -2375,10 +2375,10 @@ $type{"\\qquad"}="string";
 $contents{"\\qquad"}="     ";
 
 $type{"\\to"}="string";
-$contents{"\\to"}=" ──> ";
+$contents{"\\to"}="→";
 
 $type{"\\from"}="string";
-$contents{"\\from"}=" <── ";
+$contents{"\\from"}="←";
 
 $type{"\\wedge"}="string";
 $contents{"\\wedge"}="∧";
@@ -2390,16 +2390,16 @@ $type{"\\ltimes"}="string";
 $contents{"\\ltimes"}="⋉";
 
 $type{"\\lhd"}="string";
-$contents{"\\lhd"}=" ⊲ ";
+$contents{"\\lhd"}="⊲";
 
 $type{"\\rhd"}="string";
-$contents{"\\rhd"}=" ⊳ ";
+$contents{"\\rhd"}="⊳";
 
 $type{"\\cdot"}="string";
-$contents{"\\cdot"}=" · ";
+$contents{"\\cdot"}="·";
 
 $type{"\\circ"}="string";
-$contents{"\\circ"}=" o ";
+$contents{"\\circ"}="o";
 
 $type{"\\bullet"}="string";
 $contents{"\\bullet"}="•";
@@ -2408,49 +2408,49 @@ $type{"\\infty"}="string";
 $contents{"\\infty"}="∞";
 
 $type{"\\rtimes"}="string";
-$contents{"\\rtimes"}=" ⋊ ";
+$contents{"\\rtimes"}="⋊";
 
 $type{"\\times"}="string";
-$contents{"\\times"}=" × ";
+$contents{"\\times"}="×";
 
 $type{"\\hookrightarrow"}="string";
-$contents{"\\hookrightarrow"}=" ↪ ";
+$contents{"\\hookrightarrow"}="↪";
 
 $type{"\\hookleftarrow"}="string";
-$contents{"\\hookleftarrow"}=" ↩ ";
+$contents{"\\hookleftarrow"}="↩";
 
 $type{"\\longleftarrow"}="string";
-$contents{"\\longleftarrow"}=" <──── ";
+$contents{"\\longleftarrow"}="<──";
 
 $type{"\\longleftrightarrow"}="string";
-$contents{"\\longleftrightarrow"}=" <────> ";
+$contents{"\\longleftrightarrow"}="<──>";
 
 $type{"\\longrightarrow"}="string";
-$contents{"\\longrightarrow"}=" ────> ";
+$contents{"\\longrightarrow"}="-─>";
 
 $type{"\\rightarrow"}="string";
-$contents{"\\rightarrow"}=" ──> ";
+$contents{"\\rightarrow"}="→";
 
 $type{"\\leftarrow"}="string";
-$contents{"\\leftarrow"}=" <── ";
+$contents{"\\leftarrow"}="←";
 
 $type{"\\Rightarrow"}="string";
-$contents{"\\Rightarrow"}=" ==> ";
+$contents{"\\Rightarrow"}="⇒";
 
 $type{"\\Leftarrow"}="string";
-$contents{"\\Leftarrow"}=" <== ";
+$contents{"\\Leftarrow"}="⇐";
 
 $type{"\\mapsto"}="string";
-$contents{"\\mapsto"}=" ├──> ";
+$contents{"\\mapsto"}="├──>";
 
 $type{"\\longmapsto"}="string";
-$contents{"\\longmapsto"}=" ├────> ";
+$contents{"\\longmapsto"}="├────>";
 
 $type{"\\cap"}="string";
-$contents{"\\cap"}=" ∩ ";
+$contents{"\\cap"}="∩";
 
 $type{"\\cup"}="string";
-$contents{"\\cup"}=" ∪ ";
+$contents{"\\cup"}="∪";
 
 &define('\\bigcap','\\cap');
 &define('\\bigcup','\\cup');
@@ -2564,10 +2564,10 @@ $type{"\\iint"}="string";
 $contents{"\\iint"}="∫∫";
 
 $type{"\\iff"}="string";
-$contents{"\\iff"}=" ⇔ ";
+$contents{"\\iff"}="⇔";
 
 $type{"\\imp"}="string";
-$contents{"\\imp"}=" ⇒ ";
+$contents{"\\imp"}="⇒";
 
 # END CUSTOM MACROS
 
