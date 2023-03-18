@@ -2532,7 +2532,7 @@ sub f_section {
   local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
   $l=$l+4;
   $out[$#out]="$h,$l,$b,$sp,\n# $str\n";
-  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $deb
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(1,1) unless shift;
 }
 
@@ -2545,7 +2545,7 @@ sub f_subsection {
   local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
   $l=$l+5;
   $out[$#out]="$h,$l,$b,$sp,\n## $str\n";
-  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $deb
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(1,1) unless shift;
 }
 
@@ -2558,7 +2558,7 @@ sub f_subsubsection {
   local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
   $l=$l+6;
   $out[$#out]="$h,$l,$b,$sp,\n### $str\n";
-  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $deb
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
   &finish(1,1) unless shift;
 }
 
