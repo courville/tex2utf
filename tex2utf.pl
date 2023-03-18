@@ -2504,14 +2504,63 @@ sub note {
 
 # END CUSTOM MACROS
 
-$type{"\\section"}="string";
-$contents{"\\section"}="Section ";
+# TODO MARC should be one arg and return at the end
+#$type{"\\section"}="string";
+#$contents{"\\section"}="# Section ";
 
-$type{"\\subsection"}="string";
-$contents{"\\subsection"}="Subsection ";
+#$type{"\\subsection"}="string";
+#$contents{"\\subsection"}="## Subsection ";
 
-$type{"\\subsubsection"}="string";
-$contents{"\\subsubsection"}="Subsubsection ";
+#$type{"\\subsubsection"}="string";
+#$contents{"\\subsubsection"}="### Subsubsection ";
+
+$type{"\\section"}="sub1";
+$contents{"\\section"}="section";
+
+$type{"\\subsection"}="sub1";
+$contents{"\\subsection"}="subsection";
+
+$type{"\\subsubsection"}="sub1";
+$contents{"\\subsubsection"}="subsubsection";
+
+sub f_section {
+  warn "Entering f_section...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Nothing $out[$#out]\n__END__\n" if $debug & $debug_record;
+  local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
+  $l=$l+4;
+  $out[$#out]="$h,$l,$b,$sp,\n# $str\n";
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $deb
+  &finish(1,1) unless shift;
+}
+
+sub f_subsection {
+  warn "Entering f_subsection...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Nothing $out[$#out]\n__END__\n" if $debug & $debug_record;
+  local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
+  $l=$l+5;
+  $out[$#out]="$h,$l,$b,$sp,\n## $str\n";
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $deb
+  &finish(1,1) unless shift;
+}
+
+sub f_subsubsection {
+  warn "Entering f_subsubsection...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Nothing $out[$#out]\n__END__\n" if $debug & $debug_record;
+  local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
+  $l=$l+6;
+  $out[$#out]="$h,$l,$b,$sp,\n### $str\n";
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $deb
+  &finish(1,1) unless shift;
+}
 
 $type{"\|"}="string";
 $contents{"\|"}="||";
