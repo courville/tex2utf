@@ -797,7 +797,6 @@ sub f_end {
   } else {&puts("\\end{$arg}");}
 }
 
-
 sub f_literal_no_length {
   warn "Entering f_literal_with_length...\n" if $debug & $debug_flow;
   # &trim(1);
@@ -2327,7 +2326,7 @@ $type{"~"}="string";
 $contents{"~"}=" ";
 
 $type{"\\,"}="string";
-$contents{"\\,"}=" ";
+$contents{"\\,"}="";
 
 $type{"\\cdots"}="string";
 $contents{"\\cdots"}="⋯";
@@ -2569,16 +2568,49 @@ $contents{"\\iff"}="⇔";
 $type{"\\imp"}="string";
 $contents{"\\imp"}="⇒";
 
+for ("theorem","definition","result","note","method","formula"
+  ) {$environment{"$_"}="$_";}
+
+sub definition {
+  warn "Entering definition...\n" if $debug & $debug_flow;
+  &puts("Définition: ");
+}
+
+sub theorem {
+  warn "Entering theorem...\n" if $debug & $debug_flow;
+  &puts("Théorème: ");
+}
+
+sub formula {
+  warn "Entering formula...\n" if $debug & $debug_flow;
+  &puts("Formule: ");
+}
+
+sub method {
+  warn "Entering method...\n" if $debug & $debug_flow;
+  &puts("Méthode: ");
+}
+
+sub result {
+  warn "Entering result...\n" if $debug & $debug_flow;
+  &puts("Résultat: ");
+}
+
+sub note {
+  warn "Entering note...\n" if $debug & $debug_flow;
+  &puts("Note: ");
+}
+
 # END CUSTOM MACROS
 
 $type{"\\section"}="string";
-$contents{"\\section"}="Section ";
+$contents{"\\section"}="# Section ";
 
 $type{"\\subsection"}="string";
-$contents{"\\subsection"}="Subsection ";
+$contents{"\\subsection"}="## Subsection ";
 
 $type{"\\subsubsection"}="string";
-$contents{"\\subsubsection"}="Subsubsection ";
+$contents{"\\subsubsection"}="### Subsubsection ";
 
 $type{"\|"}="string";
 $contents{"\|"}="||";

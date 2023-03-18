@@ -2469,6 +2469,39 @@ $contents{"\\iff"}=" ⇔ ";
 $type{"\\imp"}="string";
 $contents{"\\imp"}=" ⇒ ";
 
+for ("theorem","definition","result","note","method","formula"
+  ) {$environment{"$_"}="$_";}
+
+sub definition {
+  warn "Entering definition...\n" if $debug & $debug_flow;
+  &puts("Définition: ");
+}
+
+sub theorem {
+  warn "Entering theorem...\n" if $debug & $debug_flow;
+  &puts("Théorème: ");
+}
+
+sub formula {
+  warn "Entering formula...\n" if $debug & $debug_flow;
+  &puts("Formule: ");
+}
+
+sub method {
+  warn "Entering method...\n" if $debug & $debug_flow;
+  &puts("Méthode: ");
+}
+
+sub result {
+  warn "Entering result...\n" if $debug & $debug_flow;
+  &puts("Résultat: ");
+}
+
+sub note {
+  warn "Entering note...\n" if $debug & $debug_flow;
+  &puts("Note: ");
+}
+
 # END CUSTOM MACROS
 
 $type{"\\section"}="string";
@@ -2489,6 +2522,8 @@ $contents{'\;'}=" ";
 $type{'\noindent'}="string";
 $contents{'\noindent'}="";
 
+$type{"\\ "}="string";
+$contents{"\\ "}="";
 
 &define('\\define','\\def');
 &define('\\ge','\\geq');
