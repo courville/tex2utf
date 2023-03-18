@@ -1175,6 +1175,34 @@ sub f_putover {
   &finish(1,1) unless shift;
 }
 
+sub f_deriv {
+  warn "Entering f_deriv...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Derive $out[$#out]\n__END__\n" if $debug & $debug_record;
+  local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
+  $l=$l+1;
+  $out[$#out]="$h,$l,$b,$sp,$str\'";
+  &setbaseline($out[$#out],$b);
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
+  &finish(1,1) unless shift;
+}
+
+sub f_dderiv {
+  warn "Entering f_dderiv...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Derive $out[$#out]\n__END__\n" if $debug & $debug_record;
+  local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
+  $l=$l+1;
+  $out[$#out]="$h,$l,$b,$sp,$str\"";
+  &setbaseline($out[$#out],$b);
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
+  &finish(1,1) unless shift;
+}
+
 sub f_putpar {
         warn "Entering f_putpar...\n" if $debug & $debug_flow;
   &trim(1);
@@ -2252,11 +2280,17 @@ $contents{"\\^"}="putover_string;^";
 $type{'\\"'}="sub1";
 $contents{'\\"'}='putover_string;"';
 
+#$type{'\\dot'}="sub1";
+#$contents{'\\dot'}='putover_string;.';
+
+#$type{'\\ddot'}="sub1";
+#$contents{'\\ddot'}='putover_string;..';
+
 $type{'\\dot'}="sub1";
-$contents{'\\dot'}='putover_string;.';
+$contents{'\\dot'}='deriv';
 
 $type{'\\ddot'}="sub1";
-$contents{'\\ddot'}='putover_string;..';
+$contents{'\\ddot'}='dderiv';
 
 $type{"\\not"}="sub1";
 $contents{"\\not"}="not";
