@@ -1175,6 +1175,28 @@ sub f_putover {
   &finish(1,1) unless shift;
 }
 
+sub f_nothing {
+  warn "Entering f_nothing...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Nothing $out[$#out]\n__END__\n" if $debug & $debug_record;
+  local($h,$l,$b,$sp,$str)=split(/,/,$out[$#out],5);
+  $out[$#out]=&empty();
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
+  &finish(1,1) unless shift;
+}
+
+sub f_itself {
+  warn "Entering f_itself...\n" if $debug & $debug_flow;
+  &trim(1);
+  &collapse(1);
+  &assertHave(1) || &finish("",1);
+  warn "Itself $out[$#out]\n__END__\n" if $debug & $debug_record;
+  warn "a:Last $#chunks, the first on the last level=$#level is $level[$#level]" if $debug & $debug_flow;
+  &finish(1,1) unless shift;
+}
+
 sub f_deriv {
   warn "Entering f_deriv...\n" if $debug & $debug_flow;
   &trim(1);
@@ -1384,7 +1406,8 @@ sub ddollar {
     $chunks[0]=0;
     &trim(1);
     &collapse(1);
-    &printrecord(&center($linelength,$out[0]));
+    #&printrecord(&center($linelength,$out[0]));
+    &printrecord($out[0]);
     @level=(0);
     @chunks=(0);
     @tokenByToken=(0);
@@ -2333,7 +2356,7 @@ for ("equation","gather","align"
 for ("matrix","CD","smallmatrix"
      ) {$environment{"$_"}="matrix,endmatrix;1;c";}
 
-for ("document","split","enumerate"
+for ("document","split","enumerate","tabular","center"
      ) {$environment_none{"$_"}++;}
 
 $environment{"Sb"}="subscript:matrix,endmatrix;1;l";
@@ -2490,6 +2513,15 @@ $contents{"\\cup"}="∪";
 
 # BEGIN CUSTOM MACROS
 
+$type{'\\cline'}="sub1";
+$contents{'\\cline'}="nothing";
+
+$type{"\\hline"}="string";
+$contents{"\\hline"}="----------";
+
+$type{"\\cste"}="string";
+$contents{"\\cste"}="cste";
+
 $type{"\\ssi"}="string";
 $contents{"\\ssi"}="si et seulement si";
 
@@ -2503,7 +2535,7 @@ $contents{"\\cnsp"}="condition nécessaire et suffisante portant sur";
 &define('\\integ#1,#2,#3,#4','\int_{#1}^{#2}#3 d#4');
 
 # remove macros
-for ("ve","vec","vect","Vect","dsp","dis","ds","limits","non") {
+for ("ve","vec","vect","Vect","dsp","dis","ds","limits","non","center","centering") {
   $type{"\\$_"}="nothing";
 }
 
