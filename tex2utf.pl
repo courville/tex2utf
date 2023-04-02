@@ -2046,7 +2046,7 @@ for ("text","operatorname","operatornamewithlimits","relax","-",
      "NoBlackBoxes","document","TagsOnRight","bold","dsize","roster",
      "endroster","endkey","endRefs","enddocument","displaystyle",
      "twelverm","tenrm","twelvefm","tenfm","hbox","mbox","boxed","mathscr",
-     "overrightarrow",":","tt","sf","textbf","fbox","framebox") {
+     "overrightarrow",":","tt","sf","textbf","fbox","framebox","textrm") {
   $type{"\\$_"}="nothing";
 }
 
@@ -2180,7 +2180,9 @@ $contents{"\\end"}="end";
 for ('@',"_","\$","{","}","#","&","arccos","arcsin","arctan","arg","cos",
     "cosh","cot","coth","csc","deg","det","dim","exp","gcd","hom",
     "inf","ker","lg","lim","liminf","limsup","ln","log","max","min",
-    "mod","Pr","sec","sin","sinh","sup","tan","tanh", "%") {
+    "mod","Pr","sec","sin","sinh","sup","tan","tanh",
+    "ctan","actan","acos","asin","atan","sh","ash","ach","ch","th","ath",
+    "%") {
   $type{"\\$_"}="self";
 }
 
@@ -2194,7 +2196,7 @@ for ("numberwithin","newtheorem","renewcommand","setcounter"
   $type{"\\$_"}="discard2";
 }
 
-for ("equation","gather","align"
+for ("equation","gather","align","align*","equation*"
      ) {$environment{"$_"}="ddollar,ddollar";}
 
 for ("matrix","CD","smallmatrix"
@@ -2207,9 +2209,11 @@ $environment{"Sb"}="subscript:matrix,endmatrix;1;l";
 
 $environment{"Sp"}="superscript:matrix,endmatrix;1;l";
 
+$environment{"eqnarray*"}="ddollar:matrix,endmatrix;0;r;c;l:ddollar";
 $environment{"eqnarray"}="ddollar:matrix,endmatrix;0;r;c;l:ddollar";
 $environment{"split"}="ddollar:matrix,endmatrix;0;r;l:ddollar";
 $environment{"multiline"}="ddollar:matrix,endmatrix;0;r;l:ddollar";
+$environment{"align*"}="ddollar:matrix,endmatrix;0;r;l:ddollar";
 $environment{"align"}="ddollar:matrix,endmatrix;0;r;l:ddollar";
 $environment{"aligned"}="matrix,endmatrix;0;r;l";
 $environment{"gather"}="ddollar:matrix,endmatrix;0;c:ddollar";
@@ -2241,11 +2245,14 @@ $contents{"\\uots"}="⋰";
 $type{"\\ldots"}="string";
 $contents{"\\ldots"}="…";
 
+$type{"\\ddots"}="string";
+$contents{"\\ddots"}="⋱";
+
 $type{"\\vdots"}="string";
 $contents{"\\vdots"}="⋮";
 
-$type{"\\vdots"}="string";
-$contents{"\\vdots"}="⋯";
+$type{"\\hdots"}="string";
+$contents{"\\hdots"}="⋯";
 
 $type{"\\colon"}="string";
 $contents{"\\colon"}=": ";
@@ -2392,11 +2399,11 @@ for ("grad","mult","diag","card","ch","th","argch","sh","argsh","argth",
 &define('\\tah','\\th');
 &define('\\im','Im');
 &define('\\tnh','\\th');
-&define('\\la','\\lambda');
+&define('\\la','λ');
 &define('\\fphy','\\phi');
 &define('\\ex','\\exists');
 &define('\\alp','\\alpha');
-&define('\\fa','\\forall');
+&define('\\fa','∀');
 &define('\\varepsilon','\\epsilon');
 &define('\\varphi','\\phi');
 &define('\\eps','\\epsilon');
@@ -2597,7 +2604,7 @@ $contents{"\\ "}="";
 &define('\\sp','^');
 &define('\\proclaim','\\noindent ');
 
-&defb("matrix","vmatrix","Vmatrix","smallmatrix","bmatrix","Sp","Sb","CD","align","aligned","split","multiline","gather","gathered");
+&defb("matrix","vmatrix","Vmatrix","smallmatrix","bmatrix","Sp","Sb","CD","align","align*","aligned","split","multiline","gather","gathered");
 
 if ($opt_TeX) {
   &define('\pmatrix#1','\left(\begin{matrix}#1\end{matrix}\right)');
